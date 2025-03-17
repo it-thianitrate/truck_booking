@@ -15,7 +15,7 @@ interface BookingFormProps {
   onChange: (data: any) => void;
 }
 
-const PASSCODES = ["helloworld", "thammanitrinthangadminsondesktop", "error"];
+const PASSCODES = ["TruckAccess1", "TruckAccess2", "TruckAccess2"];
 
 function BookingForm({ bookingData, onSubmit, onChange }: BookingFormProps) {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -62,7 +62,10 @@ function BookingForm({ bookingData, onSubmit, onChange }: BookingFormProps) {
     if (!bookingData.vehicleRegNo) formErrors.vehicleRegNo = "กรุณากรอกหมายเลขทะเบียนรถ";
     if (!bookingData.driverPhone) formErrors.driverPhone = "กรุณากรอกหมายเลขโทรศัพท์";
     if (!bookingData.transportCompany) formErrors.transportCompany = "กรุณาเลือกบริษัทขนส่ง";
-    if (!PASSCODES.includes(passcode)) formErrors.passcode = "รหัสผ่านไม่ถูกต้อง";
+
+    if (!PASSCODES.some(code => code.toLowerCase() === passcode.toLowerCase())) {
+      formErrors.passcode = "รหัสผ่านไม่ถูกต้อง";
+    }
 
     setErrors(formErrors);
 

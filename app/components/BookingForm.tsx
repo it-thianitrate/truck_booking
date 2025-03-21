@@ -15,7 +15,7 @@ interface BookingFormProps {
   onChange: (data: any) => void;
 }
 
-const PASSCODES = ["12345", "54321"];
+const PASSCODES = ["6789", "9876"];
 
 function BookingForm({ bookingData, onSubmit, onChange }: BookingFormProps) {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});

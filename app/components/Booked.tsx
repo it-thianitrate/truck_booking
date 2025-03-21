@@ -321,7 +321,7 @@ export default function Parking() {
               type="date"
               value={selectedDate}
               onChange={handleDateChange}
-              min={new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Bangkok' })}
+              min={new Date(new Date().setDate(new Date().getDate())).toISOString().split("T")[0]}
               max={new Date(new Date().setDate(new Date().getDate() + 14)).toISOString().split("T")[0]}
               className="border border-teal-400 rounded-lg px-3 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-200 w-full md:w-64 bg-white"
             />

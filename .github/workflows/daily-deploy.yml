@@ -1,0 +1,27 @@
+name: Daily Vercel Deploy
+
+# กำหนดเหตุการณ์ที่กระตุ้น workflow
+on:
+  schedule:
+    # รันทุกวันเวลา 00:00 UTC (เท่ากับ 07:00 ในไทย UTC+7)
+    - cron: '0 0 * * *'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # โคลน repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # ตั้งค่า Vercel CLI (ถ้าต้องการใช้ CLI)
+      - name: Setup Vercel CLI
+        run: npm install -g vercel
+
+      # Deploy ไปยัง Vercel
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        run: vercel --prod --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID --project $VERCEL_PROJECT_ID
